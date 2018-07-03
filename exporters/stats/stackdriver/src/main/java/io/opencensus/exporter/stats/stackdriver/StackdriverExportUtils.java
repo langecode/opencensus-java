@@ -271,21 +271,24 @@ final class StackdriverExportUtils {
       ViewData.AggregationWindowData windowData,
       Aggregation aggregation) {
     Point.Builder builder = Point.newBuilder();
-    builder.setInterval(createTimeInterval(windowData));
+    builder.setInterval(createTimeInterval(windowData, aggregation));
     builder.setValue(createTypedValue(aggregation, aggregationData));
     return builder.build();
   }
 
   // Convert AggregationWindowData to TimeInterval, currently only support CumulativeData.
   @VisibleForTesting
-  static TimeInterval createTimeInterval(ViewData.AggregationWindowData windowData) {
+  static TimeInterval createTimeInterval(
+      ViewData.AggregationWindowData windowData, final Aggregation aggregation) {
     final TimeInterval.Builder builder = TimeInterval.newBuilder();
     windowData.match(
         new Function<ViewData.AggregationWindowData.CumulativeData, Void>() {
           @Override
           public Void apply(ViewData.AggregationWindowData.CumulativeData arg) {
-            builder.setStartTime(convertTimestamp(arg.getStart()));
             builder.setEndTime(convertTimestamp(arg.getEnd()));
+            if (!(aggregation instanceof LastValue)) {
+              builder.setStartTime(convertTimestamp(arg.getStart()));
+            }
             return null;
           }
         },
@@ -440,7 +443,6 @@ final class StackdriverExportUtils {
       io.opencensus.contrib.monitoredresource.util.MonitoredResource autoDetectedResource) {
     switch (autoDetectedResource.getResourceType()) {
       case GCP_GCE_INSTANCE:
-        @SuppressWarnings("unchecked")
         GcpGceInstanceMonitoredResource gcpGceInstanceMonitoredResource =
             (GcpGceInstanceMonitoredResource) autoDetectedResource;
         builder.putLabels(PROJECT_ID_LABEL_KEY, gcpGceInstanceMonitoredResource.getAccount());
@@ -448,7 +450,6 @@ final class StackdriverExportUtils {
         builder.putLabels("zone", gcpGceInstanceMonitoredResource.getZone());
         return;
       case GCP_GKE_CONTAINER:
-        @SuppressWarnings("unchecked")
         GcpGkeContainerMonitoredResource gcpGkeContainerMonitoredResource =
             (GcpGkeContainerMonitoredResource) autoDetectedResource;
         builder.putLabels(PROJECT_ID_LABEL_KEY, gcpGkeContainerMonitoredResource.getAccount());
@@ -460,7 +461,6 @@ final class StackdriverExportUtils {
         builder.putLabels("zone", gcpGkeContainerMonitoredResource.getZone());
         return;
       case AWS_EC2_INSTANCE:
-        @SuppressWarnings("unchecked")
         AwsEc2InstanceMonitoredResource awsEc2InstanceMonitoredResource =
             (AwsEc2InstanceMonitoredResource) autoDetectedResource;
         builder.putLabels("aws_account", awsEc2InstanceMonitoredResource.getAccount());

@@ -10,7 +10,8 @@
 OpenCensus is a toolkit for collecting application performance and behavior data. It currently
 includes 3 apis: stats, tracing and tags.
 
-The library is in alpha stage and the API is subject to change.
+The library is in [Beta](#versioning) stage and APIs are expected to be mostly stable. The 
+library is expected to move to [GA](#versioning) stage after v1.0.0 major release.
 
 Please join [gitter](https://gitter.im/census-instrumentation/Lobby) for help or feedback on this
 project.
@@ -19,7 +20,7 @@ project.
 
 Integrating OpenCensus with a new library means recording stats or traces and propagating context.
 
-The full quick start example can also be found on the [OpenCensus website](https://opencensus.io/java.html).
+The full quick start example can also be found on the [OpenCensus website](https://opencensus.io/java/index.html).
 
 ### Add the dependencies to your project
 
@@ -29,14 +30,14 @@ For Maven add to your `pom.xml`:
   <dependency>
     <groupId>io.opencensus</groupId>
     <artifactId>opencensus-api</artifactId>
-    <version>0.14.0</version>
+    <version>0.15.0</version>
   </dependency>
 </dependencies>
 ```
 
 For Gradle add to your dependencies:
 ```gradle
-compile 'io.opencensus:opencensus-api:0.14.0'
+compile 'io.opencensus:opencensus-api:0.15.0'
 ```
 
 ### Hello "OpenCensus" trace events
@@ -156,12 +157,12 @@ For Maven add to your `pom.xml`:
   <dependency>
     <groupId>io.opencensus</groupId>
     <artifactId>opencensus-api</artifactId>
-    <version>0.14.0</version>
+    <version>0.15.0</version>
   </dependency>
   <dependency>
     <groupId>io.opencensus</groupId>
     <artifactId>opencensus-impl</artifactId>
-    <version>0.14.0</version>
+    <version>0.15.0</version>
     <scope>runtime</scope>
   </dependency>
 </dependencies>
@@ -169,8 +170,8 @@ For Maven add to your `pom.xml`:
 
 For Gradle add to your dependencies:
 ```gradle
-compile 'io.opencensus:opencensus-api:0.14.0'
-runtime 'io.opencensus:opencensus-impl:0.14.0'
+compile 'io.opencensus:opencensus-api:0.15.0'
+runtime 'io.opencensus:opencensus-impl:0.15.0'
 ```
 
 ### How to setup exporters?
@@ -192,6 +193,22 @@ runtime 'io.opencensus:opencensus-impl:0.14.0'
 If the application owner wants to export in-process tracing and stats data via HTML debugging pages
 see this [link](https://github.com/census-instrumentation/opencensus-java/tree/master/contrib/zpages#quickstart).
 
+## Versioning
+  
+This library follows [Semantic Versioning][semver].
+  
+**GA**: Libraries defined at a GA quality level are stable, and will not introduce 
+backwards-incompatible changes in any minor or patch releases. We will address issues and requests 
+with the highest priority. If we were to make a backwards-incompatible changes on an API, we will 
+first mark the existing API as deprecated and keep it for 18 months before removing it.
+  
+**Beta**: Libraries defined at a Beta quality level are expected to be mostly stable and we're 
+working towards their release candidate. We will address issues and requests with a higher priority.
+There may be backwards incompatible changes in a minor version release, though not in a patch 
+release. If an element is part of an API that is only meant to be used by exporters or other 
+opencensus libraries, then there is no deprecation period. Otherwise, we will deprecate it for 18 
+months before removing it, if possible.
+
 [travis-image]: https://travis-ci.org/census-instrumentation/opencensus-java.svg?branch=master
 [travis-url]: https://travis-ci.org/census-instrumentation/opencensus-java
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/hxthmpkxar4jq4be/branch/master?svg=true
@@ -204,6 +221,7 @@ see this [link](https://github.com/census-instrumentation/opencensus-java/tree/m
 [gitter-url]: https://gitter.im/census-instrumentation/lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [codecov-image]: https://codecov.io/gh/census-instrumentation/opencensus-java/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/census-instrumentation/opencensus-java/branch/master/
+[semver]: http://semver.org/
 [TraceExporterInstana]: https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/trace/instana#quickstart
 [TraceExporterJaeger]: https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/trace/jaeger#quickstart
 [TraceExporterLogging]: https://github.com/census-instrumentation/opencensus-java/tree/master/exporters/trace/logging#quickstart

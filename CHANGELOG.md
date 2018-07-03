@@ -1,4 +1,12 @@
 ## Unreleased
+- Add APIs to register gRPC client and server views separately.
+- Add an API MeasureMap.putAttachment() for recording exemplars.
+- Add Exemplar class and an API to get Exemplar list to DistributionData.
+
+## 0.15.0 - 2018-06-20
+- Expose the factory methods of MonitoredResource.
+- Add an experimental artifact, `opencensus-contrib-log-correlation-stackdriver`, for
+  correlating traces and logs with Stackdriver Logging.
 
 ## 0.14.0 - 2018-06-04
 - Adds Tracing.getExportComponent().shutdown() for use within application shutdown hooks.
