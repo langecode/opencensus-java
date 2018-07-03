@@ -169,6 +169,7 @@ subprojects {
         protobufVersion = '3.5.1'
         zipkinReporterVersion = '2.3.2'
         jaegerReporterVersion = '0.27.0'
+        jaxrsVersion = '2.1'
 
         libraries = [
                 appengine_api: "com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}",
@@ -189,6 +190,7 @@ subprojects {
                 grpc_core: "io.grpc:grpc-core:${grpcVersion}",
                 guava: "com.google.guava:guava:${guavaVersion}",
                 jsr305: "com.google.code.findbugs:jsr305:${findBugsVersion}",
+                rs_api: "javax.ws.rs:javax.ws.rs-api:${jaxrsVersion}",
                 signalfx_java: "com.signalfx.public:signalfx-java:${signalfxVersion}",
                 prometheus_simpleclient: "io.prometheus:simpleclient:${prometheusVersion}",
                 protobuf: "com.google.protobuf:protobuf-java:${protobufVersion}",
