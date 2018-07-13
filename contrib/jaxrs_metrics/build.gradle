@@ -1,0 +1,20 @@
+description = 'Basic JAX-RS instrumentation'
+
+apply plugin: 'java'
+
+[compileJava, compileTestJava].each() {
+    it.sourceCompatibility = 1.8
+    it.targetCompatibility = 1.8
+}
+
+dependencies {
+    compile project(':opencensus-api'),
+            project(':opencensus-impl-core'),
+            project(':opencensus-contrib-http-util'),
+            libraries.rs_api
+    testCompile project(':opencensus-impl'),
+            project(':opencensus-exporter-trace-logging'),
+            project(':opencensus-exporter-stats-prometheus')
+
+    signature "org.codehaus.mojo.signature:java18:+@signature"
+}
